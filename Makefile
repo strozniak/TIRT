@@ -28,7 +28,7 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
-OBJS = $O/PoissonGenerator.o $O/myPacket_m.o
+OBJS = $O/Get.o $O/PoissonGenerator.o $O/myPacket_m.o
 
 # Message files
 MSGFILES = \
@@ -110,7 +110,9 @@ depend:
 	$(MAKEDEPEND) $(INCLUDE_PATH) -f Makefile -P\$$O/ -- $(MSG_CC_FILES)  ./*.cc
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-$O/PoissonGenerator.o: PoissonGenerator.cc
+$O/Get.o: Get.cc
+$O/PoissonGenerator.o: PoissonGenerator.cc \
+	myPacket_m.h
 $O/myPacket_m.o: myPacket_m.cc \
 	myPacket_m.h
 

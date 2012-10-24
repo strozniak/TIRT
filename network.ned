@@ -24,8 +24,18 @@ simple PoissonGenerator
     	output out;        
 }
 
+simple Get
+{
+    gates:
+        input in;
+}
+
 network MyNetwork
 {
     submodules:
         poissonGenerator: PoissonGenerator;
+        get: Get;
+        
+    connections:
+        poissonGenerator.out --> {  delay = 100ms; } --> get.in;
 }

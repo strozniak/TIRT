@@ -15,47 +15,21 @@
 
 #include <string.h>
 #include <omnetpp.h>
-#include "myPacket_m.h"
 
-class PoissonGenerator : public cSimpleModule
+class Get : public cSimpleModule
 {
-    private:
-        double lambda;
-        int rnb;
     protected:
-        virtual cPacket *generatePacket();
-        virtual void sendMessage();
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
 };
 
-Define_Module(PoissonGenerator);
+Define_Module(Get);
 
-void PoissonGenerator::initialize(){
+void Get::initialize(){
 
-    lambda = par("lambda").doubleValue();
-    rnb = par("rnb").longValue();
-
-    sendMessage();
 }
 
-void PoissonGenerator::handleMessage(cMessage *msg){
-    sendMessage();
-}
-
-void PoissonGenerator::sendMessage(){
-    cPacket *packet = generatePacket();
-
-    int delay = poisson(lambda, rnb);
-
-    cMessage *self = new cMessage("selfMessage");
-
-    send(packet,"out");
-    scheduleAt(delay, self);
-}
-
-cPacket *PoissonGenerator::generatePacket(){
-    MyPacket *packet = new MyPacket();
-    return packet;
+void Get::handleMessage(cMessage *msg){
+    delete msg;
 }
 
