@@ -1,0 +1,3 @@
+package tirtproject;
+
+@license(LGPL);
