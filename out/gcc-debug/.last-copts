@@ -1,1 +1,1 @@
--g -Wall   -I/usr/include -fno-stack-protector  -DHAVE_PCAP -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I. -Ic:/Users/Marcin/Desktop/omnetpp-4.2.2-src-windows/omnetpp-4.2.2/include
+-g -Wall -fPIC  -fno-stack-protector -DHAVE_SWAPCONTEXT  -DHAVE_PCAP -DXMLPARSER=libxml -DWITH_PARSIM -DWITH_NETBUILDER  -I. -I/home/msosna/developerskie/omnetpp-4.2.2/include

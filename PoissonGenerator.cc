@@ -12,7 +12,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-
+#include <sstream>
+#include <string>
 #include <string.h>
 #include <omnetpp.h>
 #include "myPacket_m.h"
@@ -22,8 +23,9 @@ class PoissonGenerator : public cSimpleModule
     private:
         double lambda;
         int rnb;
+        int sends;
     protected:
-        virtual cPacket *generatePacket();
+        virtual cMessage *generatePacket();
         virtual void sendMessage();
         virtual void initialize();
         virtual void handleMessage(cMessage *msg);
@@ -36,25 +38,41 @@ void PoissonGenerator::initialize(){
     lambda = par("lambda").doubleValue();
     rnb = par("rnb").longValue();
 
+    WATCH(sends);
+
     sendMessage();
 }
 
 void PoissonGenerator::handleMessage(cMessage *msg){
+    delete msg;
     sendMessage();
 }
 
 void PoissonGenerator::sendMessage(){
-    cPacket *packet = generatePacket();
+    cMessage *sel = new cMessage("selfMessage");
 
-    int delay = poisson(lambda, rnb);
+    sends = poisson(lambda, rnb);
 
-    cMessage *self = new cMessage("selfMessage");
+    std::stringstream ss;
 
-    send(packet,"out");
-    scheduleAt(delay, self);
+    if(sends == 0){
+        cMessage *packet = generatePacket();
+        send(packet,"out");
+
+        ss << "Send ";
+
+    }else{
+        ss << "Not send ";
+    }
+
+    ss << sends;
+    std::string s = ss.str();
+    bubble(s.c_str());
+
+    scheduleAt(5.0, sel);
 }
 
-cPacket *PoissonGenerator::generatePacket(){
+cMessage *PoissonGenerator::generatePacket(){
     MyPacket *packet = new MyPacket();
     return packet;
 }

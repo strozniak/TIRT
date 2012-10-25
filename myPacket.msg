@@ -16,7 +16,7 @@
 //
 // TODO generated message class
 //
-packet MyPacket {
+message MyPacket {
     int src;
     int dst;
     int sessionID;

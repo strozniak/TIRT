@@ -18,6 +18,7 @@ package tirtproject;
 simple PoissonGenerator
 {
     parameters:
+        @display("i=block/routing");
         double lambda = default(0.5);
         int rnb = default(0);
     gates:
@@ -26,6 +27,8 @@ simple PoissonGenerator
 
 simple Get
 {
+    parameters:
+        @display("i=block/routing");
     gates:
         input in;
 }

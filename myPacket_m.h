@@ -18,7 +18,7 @@
 /**
  * Class generated from <tt>myPacket.msg</tt> by opp_msgc.
  * <pre>
- * packet MyPacket {
+ * message MyPacket {
  *     int src;
  *     int dst;
  *     int sessionID;
@@ -28,7 +28,7 @@
  * }
  * </pre>
  */
-class MyPacket : public ::cPacket
+class MyPacket : public ::cMessage
 {
   protected:
     int src_var;

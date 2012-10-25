@@ -1,12 +1,12 @@
 #
-# OMNeT++/OMNEST Makefile for TIRTProject
+# OMNeT++/OMNEST Makefile for TIRT
 #
 # This file was generated with the command:
 #  opp_makemake -f --deep -O out
 #
 
 # Name of target to be created (-o option)
-TARGET = TIRTProject$(EXE_SUFFIX)
+TARGET = TIRT$(EXE_SUFFIX)
 
 # User interface (uncomment one) (-u option)
 USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
@@ -100,7 +100,7 @@ msgheaders: $(MSGFILES:.msg=_m.h)
 
 clean:
 	-rm -rf $O
-	-rm -f TIRTProject TIRTProject.exe libTIRTProject.so libTIRTProject.a libTIRTProject.dll libTIRTProject.dylib
+	-rm -f TIRT TIRT.exe libTIRT.so libTIRT.a libTIRT.dll libTIRT.dylib
 	-rm -f ./*_m.cc ./*_m.h
 
 cleanall: clean
