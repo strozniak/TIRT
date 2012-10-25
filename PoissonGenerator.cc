@@ -49,19 +49,17 @@ void PoissonGenerator::handleMessage(cMessage *msg){
 }
 
 void PoissonGenerator::sendMessage(){
-    cMessage *sel = new cMessage("selfMessage");
 
     std::stringstream ss;
 
     simtime_t delay = poisson(lambda,rnb);
+    ss << "Self "<< delay;
 
+    std::string s = ss.str();
+    cMessage *sel = new cMessage(s.c_str());
     cMessage *packet = generatePacket();
     sendDelayed(packet, delay, "out");
     scheduleAt(simTime()+delay, sel);
-    ss << "Send "<< delay;
-
-    std::string s = ss.str();
-    bubble(s.c_str());
 
 
 }
