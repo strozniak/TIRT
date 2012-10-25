@@ -23,7 +23,7 @@ class PoissonGenerator : public cSimpleModule
     private:
         double lambda;
         int rnb;
-        int sends;
+        double delay;
     protected:
         virtual cMessage *generatePacket();
         virtual void sendMessage();
@@ -38,7 +38,7 @@ void PoissonGenerator::initialize(){
     lambda = par("lambda").doubleValue();
     rnb = par("rnb").longValue();
 
-    WATCH(sends);
+    WATCH(delay);
 
     sendMessage();
 }
@@ -51,25 +51,19 @@ void PoissonGenerator::handleMessage(cMessage *msg){
 void PoissonGenerator::sendMessage(){
     cMessage *sel = new cMessage("selfMessage");
 
-    sends = poisson(lambda, rnb);
-
     std::stringstream ss;
 
-    if(sends == 0){
-        cMessage *packet = generatePacket();
-        send(packet,"out");
+    simtime_t delay = poisson(lambda,rnb);
 
-        ss << "Send ";
+    cMessage *packet = generatePacket();
+    sendDelayed(packet, delay, "out");
+    scheduleAt(simTime()+delay, sel);
+    ss << "Send "<< delay;
 
-    }else{
-        ss << "Not send ";
-    }
-
-    ss << sends;
     std::string s = ss.str();
     bubble(s.c_str());
 
-    scheduleAt(5.0, sel);
+
 }
 
 cMessage *PoissonGenerator::generatePacket(){
