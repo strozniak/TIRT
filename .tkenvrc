@@ -1,0 +1,3 @@
+# Partial Tkenv config file -- see $HOME/.tkenvrc as well
+inspector "OnOff" "OnOff" "2" "565x341+125+125:normal"
+
