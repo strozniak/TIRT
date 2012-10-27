@@ -1,0 +1,4 @@
+#!/bin/sh
+cd `dirname $0`
+../on_off -n .:../ $*
+# for shared lib, use: opp_run -l ../on_off -n .:../ $*

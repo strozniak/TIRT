@@ -32,7 +32,7 @@ void doUnpacking(cCommBuffer *, T& t) {
 
 Register_Class(MyPacket);
 
-MyPacket::MyPacket(const char *name, int kind) : cMessage(name,kind)
+MyPacket::MyPacket(const char *name, int kind) : cPacket(name,kind)
 {
     this->src_var = 0;
     this->dst_var = 0;
@@ -42,7 +42,7 @@ MyPacket::MyPacket(const char *name, int kind) : cMessage(name,kind)
     this->payload_var = 0;
 }
 
-MyPacket::MyPacket(const MyPacket& other) : cMessage(other)
+MyPacket::MyPacket(const MyPacket& other) : cPacket(other)
 {
     copy(other);
 }
@@ -54,7 +54,7 @@ MyPacket::~MyPacket()
 MyPacket& MyPacket::operator=(const MyPacket& other)
 {
     if (this==&other) return *this;
-    cMessage::operator=(other);
+    cPacket::operator=(other);
     copy(other);
     return *this;
 }
@@ -71,7 +71,7 @@ void MyPacket::copy(const MyPacket& other)
 
 void MyPacket::parsimPack(cCommBuffer *b)
 {
-    cMessage::parsimPack(b);
+    cPacket::parsimPack(b);
     doPacking(b,this->src_var);
     doPacking(b,this->dst_var);
     doPacking(b,this->sessionID_var);
@@ -82,7 +82,7 @@ void MyPacket::parsimPack(cCommBuffer *b)
 
 void MyPacket::parsimUnpack(cCommBuffer *b)
 {
-    cMessage::parsimUnpack(b);
+    cPacket::parsimUnpack(b);
     doUnpacking(b,this->src_var);
     doUnpacking(b,this->dst_var);
     doUnpacking(b,this->sessionID_var);
@@ -176,7 +176,7 @@ class MyPacketDescriptor : public cClassDescriptor
 
 Register_ClassDescriptor(MyPacketDescriptor);
 
-MyPacketDescriptor::MyPacketDescriptor() : cClassDescriptor("MyPacket", "cMessage")
+MyPacketDescriptor::MyPacketDescriptor() : cClassDescriptor("MyPacket", "cPacket")
 {
 }
 
