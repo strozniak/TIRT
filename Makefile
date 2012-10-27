@@ -28,7 +28,7 @@ PROJECTRELATIVE_PATH =
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc and .msg files
-OBJS = $O/Get.o $O/PoissonGenerator.o $O/myPacket_m.o
+OBJS = $O/PoissonGenerator.o $O/Get.o $O/myPacket_m.o
 
 # Message files
 MSGFILES = \
