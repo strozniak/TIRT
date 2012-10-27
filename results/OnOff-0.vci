@@ -1,20 +1,21 @@
-file 491 1351327376                                             
+file 13543 1351328706                                           
 version 2
-run OnOff-0-20121027-09:30:53-896
+run OnOff-0-20121027-11:04:32-6794
 attr configname OnOff
-attr datetime 20121027-09:30:53
+attr datetime 20121027-11:04:32
 attr experiment OnOff
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network OnOff
-attr processid 896
+attr processid 6794
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
+
 vector 0  OnOff.Node_e  arrivals  ETV
-attr interpolationmode none
-0	439 52 2 6 0 0.809603330884 3 1 1 3 3
+attr interpolationmode  none
+0	422 13121 2 1074 0 278.087880498907 537 1 1 537 537

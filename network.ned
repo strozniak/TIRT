@@ -18,14 +18,27 @@ package tirtproject;
 simple PoissonGenerator
 {
     parameters:
+        @display("i=block/source");
         double lambda = default(0.5);
         int rnb = default(0);
     gates:
     	output out;        
 }
 
+simple Get
+{
+    parameters:
+        @display("i=block/sink");
+        gates:
+        	input in;
+}
+
 network MyNetwork
 {
     submodules:
         poissonGenerator: PoissonGenerator;
+        get: Get;
+        
+        connections:
+            poissonGenerator.out --> get.in;
 }
