@@ -72,7 +72,7 @@ void OnOffGenerator::handleMessage(cMessage *msg)
 
     simtime_t delay = par("delayTime");
 
-    send(ttmsg, "gate");
+    send(ttmsg, "out");
 
     scheduleAt(simTime()+delay, msgGL);
 

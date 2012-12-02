@@ -6,13 +6,25 @@
 
 class AdmControl : public cSimpleModule {
 
+    private:
+        // state
+        simtime_t lastArrival;
+
+        // statistics
+        cDoubleHistogram iaTimeHistogram;
+        cOutVector arrivalsVector;
+
+        //counts
+        int wentIn;
+        int wentOut;
 
     protected:
-      virtual void initialize();
-      virtual void handleMessage(cMessage *msg);
-      virtual void finish();
-      virtual bool packetAccep(Packet* packet);
+
+        virtual void initialize();
+        virtual void handleMessage(cMessage* msg);
+        virtual void finish();
+        //virtual bool packetAccept(Packet* packet);
 
 };
 
-#endif
+#endif /* ADMCONTROL_H_ */

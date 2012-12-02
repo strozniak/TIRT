@@ -14,3 +14,11 @@
 // 
 
 package tirtproject.AdmissionControl;
+
+simple SizeControl extends AdmControl {
+  parameters:
+    int minSize = default(0);
+	int maxSize = default(100000);
+    
+    @class(SizeControl);   
+}

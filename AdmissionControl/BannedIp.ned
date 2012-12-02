@@ -14,3 +14,10 @@
 // 
 
 package tirtproject.AdmissionControl;
+
+simple BannedIp extends AdmControl {
+  parameters:
+    string restrictedAcces = default("");
+    
+    @class(BannedIp);   
+}

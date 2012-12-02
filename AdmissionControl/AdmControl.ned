@@ -14,3 +14,69 @@
 // 
 
 package tirtproject.AdmissionControl;
+import tirtproject.Generators.*;
+import tirtproject.AdmissionControl.*;
+
+
+simple AdmControl {
+
+    @display("i=device/accesspoint");
+    
+    gates:
+        input in[];
+        output out;      
+}
+
+network ACSize {
+    
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,30");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,90");
+        };
+        
+        AC : SizeControl {
+        	@display("p=150,90");
+        };
+        
+        sink: Node {
+        	@display("p=250,90");
+        };
+        
+    connections:
+        
+        OnOff.out --> AC.in[0];
+        poissonGenerator.out --> AC.in[1];
+        AC.out --> sink.in;
+        
+}
+
+network ACBannedIP {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,30");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,90");
+        };
+        
+        AC : BannedIp {
+        	@display("p=150,90");
+        };
+        
+        sink: Node {
+        	@display("p=250,90");
+        };
+        
+    connections:
+        
+        OnOff.out --> AC.in++;
+        poissonGenerator.out --> AC.in++;
+        AC.out --> sink.in;
+ 	   
+}

@@ -25,7 +25,7 @@ simple PoissonGenerator
     	output out;        
 }
 
-simple OnfOffGenerator
+simple OnOffGenerator
 {
     parameters:
         volatile double delayTime @unit(s) = default(exponential(1s));
@@ -45,7 +45,7 @@ simple OnfOffGenerator
         output out;
 }
 
-simple Sink
+simple Node
 {
     parameters:
         @display("i=block/sink");
@@ -57,7 +57,7 @@ network PoissonGeneratorNetwork
 {
     submodules:
         poissonGenerator: PoissonGenerator;
-        sink: Sink;
+        sink: Node;
         
         connections:
             poissonGenerator.out --> sink.in;
@@ -66,8 +66,8 @@ network PoissonGeneratorNetwork
 network OnOffNetwork
 {
     submodules:
-        OnOff: OnfOffGenerator;
-        sink: Sink;
+        OnOff: OnOffGenerator;
+        sink: Node;
     connections:
         OnOff.out --> sink.in;
 }
