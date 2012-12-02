@@ -1,0 +1,57 @@
+version 2
+run General-0-20121202-18:16:19-7200
+attr configname General
+attr datetime 20121202-18:16:19
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network ""
+attr processid 7200
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+statistic PoissonGeneratorNetwork.sink 	"interarrival times"
+field count 31
+field mean 0.67741935483871
+field stddev 0.9087389347953
+field sum 21
+field sqrsum 39
+field min 0
+field max 3
+bin	-INF	0
+bin	-1.5	0
+bin	-1.3	0
+bin	-1.1	0
+bin	-0.9	0
+bin	-0.7	0
+bin	-0.5	0
+bin	-0.3	0
+bin	-0.1	17
+bin	0.1	0
+bin	0.3	0
+bin	0.5	0
+bin	0.7	0
+bin	0.9	9
+bin	1.1	0
+bin	1.3	0
+bin	1.5	0
+bin	1.7	0
+bin	1.9	3
+bin	2.1	0
+bin	2.3	0
+bin	2.5	0
+bin	2.7	0
+bin	2.9	2
+bin	3.1	0
+bin	3.3	0
+bin	3.5	0
+bin	3.7	0
+bin	3.9	0
+bin	4.1	0
+bin	4.3	0
+bin	4.5	0
