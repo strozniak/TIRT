@@ -11,17 +11,12 @@
 // 
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
-// 
-
-package tirtproject;
-
-import on_off.*;
-
-network OnOff
-{
-    submodules:
-        Node_s: Node_s;
-        Node_e: Node_e;
-    connections:
-        Node_s.gate --> Node_e.gate;
+//
+packet Packet {
+    int src;
+    int dst;
+    int sessionID;
+    int packetID;
+    int priority;
+    int payload;
 }

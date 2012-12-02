@@ -13,7 +13,7 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package tirtproject;
+package tirtproject.Generators;
 
 simple PoissonGenerator
 {
@@ -25,7 +25,27 @@ simple PoissonGenerator
     	output out;        
 }
 
-simple Get
+simple OnfOffGenerator
+{
+    parameters:
+        volatile double delayTime @unit(s) = default(exponential(1s));
+        volatile int destNumber = default(10);
+        volatile int classNumber = default(5);
+        volatile int sessionId = default(10);
+        volatile int packetId  = default(10);
+        
+        volatile int changeValue  = default(50);
+        volatile int lowerBound  = default(0);
+        volatile int upperBound  = default(100);
+        
+        volatile int OnOff = default(1);
+                
+        @display("i=block/source");
+    gates:
+        output out;
+}
+
+simple Sink
 {
     parameters:
         @display("i=block/sink");
@@ -33,12 +53,21 @@ simple Get
         	input in;
 }
 
-network MyNetwork
+network PoissonGeneratorNetwork
 {
     submodules:
         poissonGenerator: PoissonGenerator;
-        get: Get;
+        sink: Sink;
         
         connections:
-            poissonGenerator.out --> get.in;
+            poissonGenerator.out --> sink.in;
+}
+
+network OnOffNetwork
+{
+    submodules:
+        OnOff: OnfOffGenerator;
+        sink: Sink;
+    connections:
+        OnOff.out --> sink.in;
 }

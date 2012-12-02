@@ -4,25 +4,25 @@
  *      Author: Wilku
  */
 
-#ifndef NODE_S_H_
-#define NODE_S_H_
+#ifndef ONOFFGENERATOR_H_
+#define ONOFFGENERATOR_H_
 
 #include <omnetpp.h>
-#include <Payload_m.h>
+#include <Packet_m.h>
 
-class Node_s : public cSimpleModule
+class OnOffGenerator : public cSimpleModule
 {
 
   private:
-    Payload *msgGL;
+    Packet *msgGL;
     int sessionCnt;
 
   public:
-    Node_s();
-    virtual ~Node_s();
+    OnOffGenerator();
+    virtual ~OnOffGenerator();
 
   protected:
-    virtual Payload *generateMessage();
+    virtual Packet *generateMessage();
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
 };

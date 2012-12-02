@@ -13,22 +13,22 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 //
 
-#include "Node_s.h"
+#include "OnOffGenerator.h"
 
-Define_Module(Node_s);
+Define_Module(OnOffGenerator);
 
-Node_s::Node_s()
+OnOffGenerator::OnOffGenerator()
 {
     msgGL = NULL;
     sessionCnt = 0;
 }
 
-Node_s::~Node_s()
+OnOffGenerator::~OnOffGenerator()
 {
     cancelAndDelete(msgGL);
 }
 
-void Node_s::initialize()
+void OnOffGenerator::initialize()
 {
     int OnOrOff = par("OnOff");
 
@@ -38,7 +38,7 @@ void Node_s::initialize()
     };
 }
 
-void Node_s::handleMessage(cMessage *msg)
+void OnOffGenerator::handleMessage(cMessage *msg)
 {
 
     //Zmieniamy wartosc po przekroczeniu okreslonego progu
@@ -68,7 +68,7 @@ void Node_s::handleMessage(cMessage *msg)
 
     ASSERT(msg==msgGL);
 
-    Payload *ttmsg = generateMessage();
+    Packet *ttmsg = generateMessage();
 
     simtime_t delay = par("delayTime");
 
@@ -80,34 +80,31 @@ void Node_s::handleMessage(cMessage *msg)
 
 }
 
-Payload *Node_s::generateMessage()
+Packet *OnOffGenerator::generateMessage()
 {
 
     // Produce source and destination addresses.
     int src = getIndex();
-    int n = size();
     int dest = intuniform(0,int(par("destNumber")));
     if (dest>=src) dest++;
 
     //klase rowniez losujemy
     int Class = intuniform(0,int(par("classNumber")));
 
-    //Jakis tam dowolny ciag znakow
-    //char * SessionId = "|"<<sessionCnt<<"|"<<src<<"|"<<dest<<"|"<<sessionCnt<<"|";
-    //char * PacketId = "|"<<sessionCnt<<"|"<<src<<"|"<<dest<<"|"<<Class<<"|";
-
-    char * SessionId = "Test";
-    char * PacketId = "Test";
+    int SessionId = 1;
+    int PacketId = 1;
+    int Payload = 1;
 
     char msgname[30];
     sprintf(msgname, "packet-from-%d-to-%d", src, dest);
 
     // Create message object and set source and destination field.
-    Payload *msg = new Payload(msgname);
-    msg->setSRC(src);
-    msg->setDST(dest);
-    msg->setSessionId(SessionId);
-    msg->setPacketId(PacketId);
-    msg->setClass(Class);
+    Packet *msg = new Packet(msgname);
+    msg->setSrc(src);
+    msg->setDst(dest);
+    msg->setSessionID(SessionId);
+    msg->setPacketID(PacketId);
+    msg->setPriority(Class);
+    msg->setPayload(Payload);
     return msg;
 }

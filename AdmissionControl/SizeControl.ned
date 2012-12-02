@@ -13,19 +13,4 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef __ON_OFF_NODE_H_
-#define __ON_OFF_NODE_H_
-
-#include <omnetpp.h>
-
-/**
- * TODO - Generated class
- */
-class Node : public cSimpleModule
-{
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
-};
-
-#endif
+package tirtproject.AdmissionControl;

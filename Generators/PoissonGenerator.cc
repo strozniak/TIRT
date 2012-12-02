@@ -15,7 +15,7 @@
 
 #include <string.h>
 #include <omnetpp.h>
-#include "myPacket_m.h"
+#include "Packet_m.h"
 
 class PoissonGenerator : public cSimpleModule
 {
@@ -63,7 +63,7 @@ void PoissonGenerator::sendMessage(){
 }
 
 cMessage *PoissonGenerator::generatePacket(){
-    MyPacket *packet = new MyPacket();
+    Packet *packet = new Packet();
     return packet;
 }
 

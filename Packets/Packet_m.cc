@@ -1,5 +1,5 @@
 //
-// Generated file, do not edit! Created by opp_msgc 4.2 from Payload.msg.
+// Generated file, do not edit! Created by opp_msgc 4.2 from Packets/Packet.msg.
 //
 
 // Disable warnings about unused variables, empty switch stmts, etc:
@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <sstream>
-#include "Payload_m.h"
+#include "Packet_m.h"
 
 // Template rule which fires if a struct or class doesn't have operator<<
 template<typename T>
@@ -30,27 +30,28 @@ void doUnpacking(cCommBuffer *, T& t) {
 
 
 
-Register_Class(Payload);
+Register_Class(Packet);
 
-Payload::Payload(const char *name, int kind) : cPacket(name,kind)
+Packet::Packet(const char *name, int kind) : cPacket(name,kind)
 {
-    this->DST_var = 0;
-    this->SRC_var = 0;
-    this->SessionId_var = 0;
-    this->PacketId_var = 0;
-    this->Class_var = 0;
+    this->src_var = 0;
+    this->dst_var = 0;
+    this->sessionID_var = 0;
+    this->packetID_var = 0;
+    this->priority_var = 0;
+    this->payload_var = 0;
 }
 
-Payload::Payload(const Payload& other) : cPacket(other)
+Packet::Packet(const Packet& other) : cPacket(other)
 {
     copy(other);
 }
 
-Payload::~Payload()
+Packet::~Packet()
 {
 }
 
-Payload& Payload::operator=(const Payload& other)
+Packet& Packet::operator=(const Packet& other)
 {
     if (this==&other) return *this;
     cPacket::operator=(other);
@@ -58,90 +59,103 @@ Payload& Payload::operator=(const Payload& other)
     return *this;
 }
 
-void Payload::copy(const Payload& other)
+void Packet::copy(const Packet& other)
 {
-    this->DST_var = other.DST_var;
-    this->SRC_var = other.SRC_var;
-    this->SessionId_var = other.SessionId_var;
-    this->PacketId_var = other.PacketId_var;
-    this->Class_var = other.Class_var;
+    this->src_var = other.src_var;
+    this->dst_var = other.dst_var;
+    this->sessionID_var = other.sessionID_var;
+    this->packetID_var = other.packetID_var;
+    this->priority_var = other.priority_var;
+    this->payload_var = other.payload_var;
 }
 
-void Payload::parsimPack(cCommBuffer *b)
+void Packet::parsimPack(cCommBuffer *b)
 {
     cPacket::parsimPack(b);
-    doPacking(b,this->DST_var);
-    doPacking(b,this->SRC_var);
-    doPacking(b,this->SessionId_var);
-    doPacking(b,this->PacketId_var);
-    doPacking(b,this->Class_var);
+    doPacking(b,this->src_var);
+    doPacking(b,this->dst_var);
+    doPacking(b,this->sessionID_var);
+    doPacking(b,this->packetID_var);
+    doPacking(b,this->priority_var);
+    doPacking(b,this->payload_var);
 }
 
-void Payload::parsimUnpack(cCommBuffer *b)
+void Packet::parsimUnpack(cCommBuffer *b)
 {
     cPacket::parsimUnpack(b);
-    doUnpacking(b,this->DST_var);
-    doUnpacking(b,this->SRC_var);
-    doUnpacking(b,this->SessionId_var);
-    doUnpacking(b,this->PacketId_var);
-    doUnpacking(b,this->Class_var);
+    doUnpacking(b,this->src_var);
+    doUnpacking(b,this->dst_var);
+    doUnpacking(b,this->sessionID_var);
+    doUnpacking(b,this->packetID_var);
+    doUnpacking(b,this->priority_var);
+    doUnpacking(b,this->payload_var);
 }
 
-int Payload::getDST() const
+int Packet::getSrc() const
 {
-    return DST_var;
+    return src_var;
 }
 
-void Payload::setDST(int DST)
+void Packet::setSrc(int src)
 {
-    this->DST_var = DST;
+    this->src_var = src;
 }
 
-int Payload::getSRC() const
+int Packet::getDst() const
 {
-    return SRC_var;
+    return dst_var;
 }
 
-void Payload::setSRC(int SRC)
+void Packet::setDst(int dst)
 {
-    this->SRC_var = SRC;
+    this->dst_var = dst;
 }
 
-const char * Payload::getSessionId() const
+int Packet::getSessionID() const
 {
-    return SessionId_var.c_str();
+    return sessionID_var;
 }
 
-void Payload::setSessionId(const char * SessionId)
+void Packet::setSessionID(int sessionID)
 {
-    this->SessionId_var = SessionId;
+    this->sessionID_var = sessionID;
 }
 
-const char * Payload::getPacketId() const
+int Packet::getPacketID() const
 {
-    return PacketId_var.c_str();
+    return packetID_var;
 }
 
-void Payload::setPacketId(const char * PacketId)
+void Packet::setPacketID(int packetID)
 {
-    this->PacketId_var = PacketId;
+    this->packetID_var = packetID;
 }
 
-int Payload::getClass() const
+int Packet::getPriority() const
 {
-    return Class_var;
+    return priority_var;
 }
 
-void Payload::setClass(int Class)
+void Packet::setPriority(int priority)
 {
-    this->Class_var = Class;
+    this->priority_var = priority;
 }
 
-class PayloadDescriptor : public cClassDescriptor
+int Packet::getPayload() const
+{
+    return payload_var;
+}
+
+void Packet::setPayload(int payload)
+{
+    this->payload_var = payload;
+}
+
+class PacketDescriptor : public cClassDescriptor
 {
   public:
-    PayloadDescriptor();
-    virtual ~PayloadDescriptor();
+    PacketDescriptor();
+    virtual ~PacketDescriptor();
 
     virtual bool doesSupport(cObject *obj) const;
     virtual const char *getProperty(const char *propertyname) const;
@@ -160,34 +174,34 @@ class PayloadDescriptor : public cClassDescriptor
     virtual void *getFieldStructPointer(void *object, int field, int i) const;
 };
 
-Register_ClassDescriptor(PayloadDescriptor);
+Register_ClassDescriptor(PacketDescriptor);
 
-PayloadDescriptor::PayloadDescriptor() : cClassDescriptor("Payload", "cPacket")
+PacketDescriptor::PacketDescriptor() : cClassDescriptor("Packet", "cPacket")
 {
 }
 
-PayloadDescriptor::~PayloadDescriptor()
+PacketDescriptor::~PacketDescriptor()
 {
 }
 
-bool PayloadDescriptor::doesSupport(cObject *obj) const
+bool PacketDescriptor::doesSupport(cObject *obj) const
 {
-    return dynamic_cast<Payload *>(obj)!=NULL;
+    return dynamic_cast<Packet *>(obj)!=NULL;
 }
 
-const char *PayloadDescriptor::getProperty(const char *propertyname) const
+const char *PacketDescriptor::getProperty(const char *propertyname) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     return basedesc ? basedesc->getProperty(propertyname) : NULL;
 }
 
-int PayloadDescriptor::getFieldCount(void *object) const
+int PacketDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 5+basedesc->getFieldCount(object) : 5;
+    return basedesc ? 6+basedesc->getFieldCount(object) : 6;
 }
 
-unsigned int PayloadDescriptor::getFieldTypeFlags(void *object, int field) const
+unsigned int PacketDescriptor::getFieldTypeFlags(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -201,11 +215,12 @@ unsigned int PayloadDescriptor::getFieldTypeFlags(void *object, int field) const
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<5) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<6) ? fieldTypeFlags[field] : 0;
 }
 
-const char *PayloadDescriptor::getFieldName(void *object, int field) const
+const char *PacketDescriptor::getFieldName(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -214,28 +229,30 @@ const char *PayloadDescriptor::getFieldName(void *object, int field) const
         field -= basedesc->getFieldCount(object);
     }
     static const char *fieldNames[] = {
-        "DST",
-        "SRC",
-        "SessionId",
-        "PacketId",
-        "Class",
+        "src",
+        "dst",
+        "sessionID",
+        "packetID",
+        "priority",
+        "payload",
     };
-    return (field>=0 && field<5) ? fieldNames[field] : NULL;
+    return (field>=0 && field<6) ? fieldNames[field] : NULL;
 }
 
-int PayloadDescriptor::findField(void *object, const char *fieldName) const
+int PacketDescriptor::findField(void *object, const char *fieldName) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount(object) : 0;
-    if (fieldName[0]=='D' && strcmp(fieldName, "DST")==0) return base+0;
-    if (fieldName[0]=='S' && strcmp(fieldName, "SRC")==0) return base+1;
-    if (fieldName[0]=='S' && strcmp(fieldName, "SessionId")==0) return base+2;
-    if (fieldName[0]=='P' && strcmp(fieldName, "PacketId")==0) return base+3;
-    if (fieldName[0]=='C' && strcmp(fieldName, "Class")==0) return base+4;
+    if (fieldName[0]=='s' && strcmp(fieldName, "src")==0) return base+0;
+    if (fieldName[0]=='d' && strcmp(fieldName, "dst")==0) return base+1;
+    if (fieldName[0]=='s' && strcmp(fieldName, "sessionID")==0) return base+2;
+    if (fieldName[0]=='p' && strcmp(fieldName, "packetID")==0) return base+3;
+    if (fieldName[0]=='p' && strcmp(fieldName, "priority")==0) return base+4;
+    if (fieldName[0]=='p' && strcmp(fieldName, "payload")==0) return base+5;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
-const char *PayloadDescriptor::getFieldTypeString(void *object, int field) const
+const char *PacketDescriptor::getFieldTypeString(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -246,14 +263,15 @@ const char *PayloadDescriptor::getFieldTypeString(void *object, int field) const
     static const char *fieldTypeStrings[] = {
         "int",
         "int",
-        "string",
-        "string",
+        "int",
+        "int",
+        "int",
         "int",
     };
-    return (field>=0 && field<5) ? fieldTypeStrings[field] : NULL;
+    return (field>=0 && field<6) ? fieldTypeStrings[field] : NULL;
 }
 
-const char *PayloadDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
+const char *PacketDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -266,7 +284,7 @@ const char *PayloadDescriptor::getFieldProperty(void *object, int field, const c
     }
 }
 
-int PayloadDescriptor::getArraySize(void *object, int field) const
+int PacketDescriptor::getArraySize(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -274,13 +292,13 @@ int PayloadDescriptor::getArraySize(void *object, int field) const
             return basedesc->getArraySize(object, field);
         field -= basedesc->getFieldCount(object);
     }
-    Payload *pp = (Payload *)object; (void)pp;
+    Packet *pp = (Packet *)object; (void)pp;
     switch (field) {
         default: return 0;
     }
 }
 
-std::string PayloadDescriptor::getFieldAsString(void *object, int field, int i) const
+std::string PacketDescriptor::getFieldAsString(void *object, int field, int i) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -288,18 +306,19 @@ std::string PayloadDescriptor::getFieldAsString(void *object, int field, int i) 
             return basedesc->getFieldAsString(object,field,i);
         field -= basedesc->getFieldCount(object);
     }
-    Payload *pp = (Payload *)object; (void)pp;
+    Packet *pp = (Packet *)object; (void)pp;
     switch (field) {
-        case 0: return long2string(pp->getDST());
-        case 1: return long2string(pp->getSRC());
-        case 2: return oppstring2string(pp->getSessionId());
-        case 3: return oppstring2string(pp->getPacketId());
-        case 4: return long2string(pp->getClass());
+        case 0: return long2string(pp->getSrc());
+        case 1: return long2string(pp->getDst());
+        case 2: return long2string(pp->getSessionID());
+        case 3: return long2string(pp->getPacketID());
+        case 4: return long2string(pp->getPriority());
+        case 5: return long2string(pp->getPayload());
         default: return "";
     }
 }
 
-bool PayloadDescriptor::setFieldAsString(void *object, int field, int i, const char *value) const
+bool PacketDescriptor::setFieldAsString(void *object, int field, int i, const char *value) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -307,18 +326,19 @@ bool PayloadDescriptor::setFieldAsString(void *object, int field, int i, const c
             return basedesc->setFieldAsString(object,field,i,value);
         field -= basedesc->getFieldCount(object);
     }
-    Payload *pp = (Payload *)object; (void)pp;
+    Packet *pp = (Packet *)object; (void)pp;
     switch (field) {
-        case 0: pp->setDST(string2long(value)); return true;
-        case 1: pp->setSRC(string2long(value)); return true;
-        case 2: pp->setSessionId((value)); return true;
-        case 3: pp->setPacketId((value)); return true;
-        case 4: pp->setClass(string2long(value)); return true;
+        case 0: pp->setSrc(string2long(value)); return true;
+        case 1: pp->setDst(string2long(value)); return true;
+        case 2: pp->setSessionID(string2long(value)); return true;
+        case 3: pp->setPacketID(string2long(value)); return true;
+        case 4: pp->setPriority(string2long(value)); return true;
+        case 5: pp->setPayload(string2long(value)); return true;
         default: return false;
     }
 }
 
-const char *PayloadDescriptor::getFieldStructName(void *object, int field) const
+const char *PacketDescriptor::getFieldStructName(void *object, int field) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -332,11 +352,12 @@ const char *PayloadDescriptor::getFieldStructName(void *object, int field) const
         NULL,
         NULL,
         NULL,
+        NULL,
     };
-    return (field>=0 && field<5) ? fieldStructNames[field] : NULL;
+    return (field>=0 && field<6) ? fieldStructNames[field] : NULL;
 }
 
-void *PayloadDescriptor::getFieldStructPointer(void *object, int field, int i) const
+void *PacketDescriptor::getFieldStructPointer(void *object, int field, int i) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     if (basedesc) {
@@ -344,7 +365,7 @@ void *PayloadDescriptor::getFieldStructPointer(void *object, int field, int i) c
             return basedesc->getFieldStructPointer(object, field, i);
         field -= basedesc->getFieldCount(object);
     }
-    Payload *pp = (Payload *)object; (void)pp;
+    Packet *pp = (Packet *)object; (void)pp;
     switch (field) {
         default: return NULL;
     }

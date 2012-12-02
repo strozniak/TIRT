@@ -13,13 +13,31 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-//
-// TODO generated message class
-//
-packet Payload {
-    int DST;
-    int SRC;
-    string SessionId;
-    string PacketId;
-    int Class;
+#include "Node.h"
+
+Define_Module(Node);
+
+void Node::initialize()
+{
+    lastArrival = simTime();
+    iaTimeHistogram.setName("interarrival times");
+    arrivalsVector.setName("arrivals");
+    arrivalsVector.setInterpolationMode(cOutVector::NONE);
+}
+
+void Node::handleMessage(cMessage *msg)
+{
+    simtime_t d = simTime() - lastArrival;
+    EV << "Received " << msg->getName() << endl;
+    delete msg;
+
+    iaTimeHistogram.collect(d);
+    arrivalsVector.record(1);
+
+    lastArrival = simTime();
+}
+
+void Node::finish()
+{
+    recordStatistic(&iaTimeHistogram);
 }

@@ -1,4 +1,4 @@
-	//
+//
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -13,25 +13,28 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package tirtproject;
+#ifndef __ON_OFF_NODE_H_
+#define __ON_OFF_NODE_H_
 
-simple Node_s
+#include <omnetpp.h>
+
+/**
+ * TODO - Generated class
+ */
+class Node : public cSimpleModule
 {
-    parameters:
-        volatile double delayTime @unit(s) = default(exponential(1s));
-        volatile int destNumber = default(10);
-        volatile int classNumber = default(5);
-        volatile int sessionId = default(10);
-        volatile int packetId  = default(10);
-        
-        volatile int changeValue  = default(50);
-        volatile int lowerBound  = default(0);
-        volatile int upperBound  = default(100);
-        
-        volatile int OnOff = default(1);
-                
-        @display("i=block/source");
-    gates:
-        output gate;
-}
+    private:
+      // state
+      simtime_t lastArrival;
 
+      // statistics
+      cDoubleHistogram iaTimeHistogram;
+      cOutVector arrivalsVector;
+
+    protected:
+      virtual void initialize();
+      virtual void handleMessage(cMessage *msg);
+      virtual void finish();
+};
+
+#endif
