@@ -1,0 +1,57 @@
+version 2
+run ACBannedIP-0-20121202-19:00:29-2472
+attr configname ACBannedIP
+attr datetime 20121202-19:00:29
+attr experiment ACBannedIP
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network tirtproject.AdmissionControl.ACBannedIP
+attr processid 2472
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+statistic ACBannedIP.sink 	"interarrival times"
+field count 67
+field mean 1.3063088761041
+field stddev 1.2614065862623
+field sum 87.522694698977
+field sqrsum 219.34734695298
+field min 0
+field max 5.360100350243
+bin	-INF	0
+bin	-2.6800501751215	0
+bin	-2.322710151772	0
+bin	-1.9653701284224	0
+bin	-1.6080301050729	0
+bin	-1.2506900817234	0
+bin	-0.89335005837383	0
+bin	-0.5360100350243	0
+bin	-0.17867001167477	12
+bin	0.17867001167477	12
+bin	0.5360100350243	8
+bin	0.89335005837383	9
+bin	1.2506900817234	6
+bin	1.6080301050729	3
+bin	1.9653701284224	5
+bin	2.322710151772	1
+bin	2.6800501751215	1
+bin	3.037390198471	4
+bin	3.3947302218206	2
+bin	3.7520702451701	3
+bin	4.1094102685196	0
+bin	4.4667502918692	0
+bin	4.8240903152187	0
+bin	5.1814303385682	1
+bin	5.5387703619178	0
+bin	5.8961103852673	0
+bin	6.2534504086168	0
+bin	6.6107904319664	0
+bin	6.9681304553159	0
+bin	7.3254704786654	0
+bin	7.682810502015	0
+bin	8.0401505253645	0

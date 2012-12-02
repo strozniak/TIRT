@@ -23,7 +23,7 @@ class AdmControl : public cSimpleModule {
         virtual void initialize();
         virtual void handleMessage(cMessage* msg);
         virtual void finish();
-        //virtual bool packetAccept(Packet* packet);
+        virtual bool packetAccept(Packet* packet) = 0;
 
 };
 

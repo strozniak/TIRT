@@ -1,6 +1,4 @@
-#include <AdmControl.h>
-
-Define_Module(AdmControl);
+#include "AdmControl.h"
 
 void AdmControl::initialize()
 {
@@ -11,8 +9,8 @@ void AdmControl::initialize()
     WATCH(wentIn);
     WATCH(wentOut);
 
-    iaTimeHistogram.setName("interarrival times");
-    arrivalsVector.setName("arrivals");
+    iaTimeHistogram.setName("Time packets went through");
+    arrivalsVector.setName("Arrivals AC");
     arrivalsVector.setInterpolationMode(cOutVector::NONE);
 
 }
@@ -29,13 +27,12 @@ void AdmControl::handleMessage(cMessage* msg)
     EV << "Received " << pck->getName() << endl;
 
     //sprawdzenie akceptacji pakietu
-    //if(packetAccept(pck)){
+    if(packetAccept(pck)){
 
         //zebranie danych
         simtime_t d = simTime() - lastArrival;
         iaTimeHistogram.collect(d);
         arrivalsVector.record(1);
-        wentOut++;
 
         //pobranie bramy wyjsciowej i wyslanie przez nia pakietu
         cGate* out = gate("out");
@@ -44,11 +41,11 @@ void AdmControl::handleMessage(cMessage* msg)
         //zwiekszenie ilosci pakietow jakie wyszly
         wentOut++;
 
-    //}
-    //else {
-    //    EV << "Blocked " << pck->getName() << endl;
-    //    delete pck;
-    //}
+    }
+    else {
+        EV << "Blocked " << pck->getName() << endl;
+        delete pck;
+    }
 
 }
 

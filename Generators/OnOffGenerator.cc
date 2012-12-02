@@ -83,28 +83,25 @@ void OnOffGenerator::handleMessage(cMessage *msg)
 Packet *OnOffGenerator::generateMessage()
 {
 
-    // Produce source and destination addresses.
-    int src = getIndex();
-    int dest = intuniform(0,int(par("destNumber")));
-    if (dest>=src) dest++;
-
-    //klase rowniez losujemy
-    int Class = intuniform(0,int(par("classNumber")));
-
+    char msgname[30];
+    int src = 0;
+    int dest = 1;
+    int Class = 1;
     int SessionId = 1;
     int PacketId = 1;
     int Payload = 1;
-
-    char msgname[30];
+    int ByteLength = rand()%200000;
     sprintf(msgname, "packet-from-%d-to-%d", src, dest);
 
-    // Create message object and set source and destination field.
-    Packet *msg = new Packet(msgname);
-    msg->setSrc(src);
-    msg->setDst(dest);
-    msg->setSessionID(SessionId);
-    msg->setPacketID(PacketId);
-    msg->setPriority(Class);
-    msg->setPayload(Payload);
-    return msg;
+    Packet *packet = new Packet(msgname);
+
+    packet->setSrc(src);
+    packet->setDst(dest);
+    packet->setSessionID(SessionId);
+    packet->setPacketID(PacketId);
+    packet->setPriority(Class);
+    packet->setPayload(Payload);
+    packet->setByteLength(ByteLength);
+
+    return packet;
 }

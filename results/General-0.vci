@@ -1,21 +1,24 @@
-file 778 1354468589                                             
+file 4213 1354471004                                            
 version 2
-run General-0-20121202-18:16:19-7200
+run General-0-20121202-18:53:00-7248
 attr configname General
-attr datetime 20121202-18:16:19
+attr datetime 20121202-18:53:00
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network ""
-attr processid 7200
+attr processid 7248
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 
-vector 0  PoissonGeneratorNetwork.sink  arrivals  ETV
+vector 0  ACBannedIP.AC  arrivals  ETV
 attr interpolationmode  none
-0	460 0 1 61 0 21 31 1 1 31 31
+vector 1  ACBannedIP.sink  arrivals  ETV
+attr interpolationmode  none
+0	517 0 2 379 0 47 127 1 1 127 127
+1	2365 0 5 381 0 47 127 1 1 127 127

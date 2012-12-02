@@ -63,7 +63,27 @@ void PoissonGenerator::sendMessage(){
 }
 
 cMessage *PoissonGenerator::generatePacket(){
-    Packet *packet = new Packet();
+
+    char msgname[30];
+    int src = 1;
+    int dest = 1;
+    int Class = 1;
+    int SessionId = 1;
+    int PacketId = 1;
+    int Payload = 1;
+    int ByteLength = rand()%200000;
+    sprintf(msgname, "packet-from-%d-to-%d", src, dest);
+
+    Packet *packet = new Packet(msgname);
+
+    packet->setSrc(src);
+    packet->setDst(dest);
+    packet->setSessionID(SessionId);
+    packet->setPacketID(PacketId);
+    packet->setPriority(Class);
+    packet->setPayload(Payload);
+    packet->setByteLength(ByteLength);
+
     return packet;
 }
 

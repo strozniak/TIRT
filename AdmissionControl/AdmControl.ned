@@ -15,7 +15,8 @@
 
 package tirtproject.AdmissionControl;
 import tirtproject.Generators.*;
-import tirtproject.AdmissionControl.*;
+import tirtproject.AdmissionControl.BannedIp;
+import tirtproject.AdmissionControl.SizeControl;
 
 
 simple AdmControl {
@@ -31,11 +32,11 @@ network ACSize {
     
     submodules:
         OnOff: OnOffGenerator {
-        	@display("p=50,30");
+        	@display("p=50,50");
         };
         
         poissonGenerator: PoissonGenerator {
-        	@display("p=50,90");
+        	@display("p=50,150");
         };
         
         AC : SizeControl {
@@ -48,8 +49,8 @@ network ACSize {
         
     connections:
         
-        OnOff.out --> AC.in[0];
-        poissonGenerator.out --> AC.in[1];
+        OnOff.out --> AC.in++;
+        poissonGenerator.out --> AC.in++;
         AC.out --> sink.in;
         
 }
@@ -58,11 +59,11 @@ network ACBannedIP {
 
     submodules:
         OnOff: OnOffGenerator {
-        	@display("p=50,30");
+        	@display("p=50,50");
         };
         
         poissonGenerator: PoissonGenerator {
-        	@display("p=50,90");
+        	@display("p=50,150");
         };
         
         AC : BannedIp {
