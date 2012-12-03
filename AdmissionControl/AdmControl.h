@@ -9,6 +9,7 @@ class AdmControl : public cSimpleModule {
     private:
         // state
         simtime_t lastArrival;
+        simtime_t delay;
 
         // statistics
         cDoubleHistogram iaTimeHistogram;
@@ -24,6 +25,9 @@ class AdmControl : public cSimpleModule {
         virtual void handleMessage(cMessage* msg);
         virtual void finish();
         virtual bool packetAccept(Packet* packet) = 0;
+
+        //counts
+        int processing;
 
 };
 

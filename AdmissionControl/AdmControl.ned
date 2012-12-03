@@ -21,6 +21,8 @@ import tirtproject.AdmissionControl.SizeControl;
 
 simple AdmControl {
 
+	volatile double delay @unit(s) = default(exponential(1s));
+
     @display("i=device/accesspoint");
     
     gates:
@@ -67,6 +69,60 @@ network ACBannedIP {
         };
         
         AC : BannedIp {
+        	@display("p=150,90");
+        };
+        
+        sink: Node {
+        	@display("p=250,90");
+        };
+        
+    connections:
+        
+        OnOff.out --> AC.in++;
+        poissonGenerator.out --> AC.in++;
+        AC.out --> sink.in;
+ 	   
+}
+
+network ACBuffor {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,50");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,150");
+        };
+        
+        AC : BufforControl {
+        	@display("p=150,90");
+        };
+        
+        sink: Node {
+        	@display("p=250,90");
+        };
+        
+    connections:
+        
+        OnOff.out --> AC.in++;
+        poissonGenerator.out --> AC.in++;
+        AC.out --> sink.in;
+ 	   
+}
+
+network ACBlue {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,50");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,150");
+        };
+        
+        AC : BLUEControl {
         	@display("p=150,90");
         };
         

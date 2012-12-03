@@ -17,10 +17,8 @@ bool SizeControl::packetAccept(Packet* pck)
 {
     uint64_t pckSize = pck->getByteLength();
 
-    if(pckSize >= minSize && pckSize <= maxSize) {
+    if(pckSize >= minSize && pckSize <= maxSize)
         return true;
-    }
-    else{
+    else
         return false;
-    }
 }

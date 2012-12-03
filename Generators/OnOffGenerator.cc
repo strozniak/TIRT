@@ -85,7 +85,7 @@ Packet *OnOffGenerator::generateMessage()
 
     char msgname[30];
     int src = 0;
-    int dest = 1;
+    int dest = 5;
     int Class = 1;
     int SessionId = 1;
     int PacketId = 1;

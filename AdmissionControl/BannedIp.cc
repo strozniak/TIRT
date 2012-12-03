@@ -17,5 +17,8 @@ void BannedIp::initialize()
 
 bool BannedIp::packetAccept(Packet* pck)
 {
-        return restrictedAcces.find(pck->getSrc()) == restrictedAcces.end();
+        if (restrictedAcces.find(pck->getSrc()) == restrictedAcces.end())
+            return true;
+        else
+            return false;
 }

@@ -8,8 +8,8 @@
 class SizeControl : public AdmControl {
 
     protected:
-        uint64_t minSize;
-        uint64_t maxSize;
+        uint32_t minSize;
+        uint32_t maxSize;
 
         virtual void initialize();
         virtual bool packetAccept(Packet* packet);
