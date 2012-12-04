@@ -1,0 +1,23 @@
+file 8105 1354652664                                            
+version 2
+run ACBlue-0-20121203-20:02:52-6308
+attr configname ACBlue
+attr datetime 20121203-20:02:52
+attr experiment ACBlue
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network tirtproject.AdmissionControl.ACBlue
+attr processid 6308
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 0  ACBlue.AC  "Arrivals AC"  ETV
+attr interpolationmode none
+0	544 3780 7 986 1 91 231 1 1 231 231
+vector 1  ACBlue.sink  arrivals  ETV
+attr interpolationmode none
+1	4324 3781 11 987 1 91 231 1 1 231 231
