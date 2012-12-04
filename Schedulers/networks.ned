@@ -13,24 +13,17 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package tirtproject;
+package tirtproject.Schedulers;
 
-simple PoissonGenerator
+simple Scheduler
 {
     parameters:
         @display("i=block/source");
-        double lambda = default(0.5);
-        int rnb = default(0);
     gates:
     	output out;        
 }
 
-network MyNetwork
+network SchedulersNetwork
 {
-    submodules:
-        poissonGenerator: PoissonGenerator;
-        get: Get;
-        
-        connections:
-            poissonGenerator.out --> get.in;
+    
 }

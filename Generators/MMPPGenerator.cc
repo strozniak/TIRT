@@ -16,7 +16,7 @@
 
 #include <string.h>
 #include <omnetpp.h>
-#include "myPacket_m.h"
+#include "Packet_m.h"
 
 class MMPPGenerator : public cSimpleModule
 {
@@ -65,7 +65,7 @@ void MMPPGenerator::sendMessage(){
 }
 
 cMessage *MMPPGenerator::generatePacket(){
-    MyPacket *packet = new MyPacket();
+    Packet *packet = new Packet();
     return packet;
 }
 
