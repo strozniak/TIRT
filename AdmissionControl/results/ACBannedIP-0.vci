@@ -1,23 +1,24 @@
-file 1688 1354707706                                            
+file 8988 1354726757                                            
 version 2
-run ACBannedIP-0-20121203-19:01:07-5088
+run ACBannedIP-0-20121205-17:58:54-4116
 attr configname ACBannedIP
-attr datetime 20121203-19:01:07
+attr datetime 20121205-17:58:54
 attr experiment ACBannedIP
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvars2 $repetition=0
 attr measurement ""
 attr network tirtproject.AdmissionControl.ACBannedIP
-attr processid 5088
+attr processid 4116
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
+
 vector 0  ACBannedIP.AC  "Arrivals AC"  ETV
-attr interpolationmode none
-0	568 560 4 163 0 22.727489742927 24 1 1 24 24
+attr interpolationmode  none
 vector 1  ACBannedIP.sink  arrivals  ETV
-attr interpolationmode none
-1	1128 560 5 164 0 22.727489742927 24 1 1 24 24
+attr interpolationmode  none
+0	568 0 7 850 1 128.527127556894 203 1 1 203 203
+1	4791 0 8 841 1 127.5 202 1 1 202 202

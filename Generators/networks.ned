@@ -45,6 +45,16 @@ simple OnOffGenerator
         output out;
 }
 
+simple MMPPGenerator
+{
+    parameters:
+        @display("i=block/source");
+        double lambda = default(0.5);
+        int rnb = default(0);
+    gates:
+    	output out;     
+}
+
 simple Node
 {
     parameters:
@@ -70,4 +80,14 @@ network OnOffNetwork
         sink: Node;
     connections:
         OnOff.out --> sink.in;
+}
+
+network MMPPNetwork
+{
+    submodules:
+        mmppGenerator: MMPPGenerator;
+        sink: Node;
+        
+        connections:
+            mmppGenerator.out --> sink.in;
 }
