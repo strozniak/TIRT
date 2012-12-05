@@ -17,32 +17,40 @@
 
 Define_Module(RRScheduler)
 
+void RRScheduler::initialize(){
+    Scheduler::initialize();
+}
+
 bool RRScheduler::receivePacket(Packet* packet){
     int source = packet->getSrc();
 
-    bool find = false;
-    int num = -1;
-    for(list<int>::iterator iter = address.begin(); !find && iter != address.end(); ++iter){
-        num++;
-        find = (*iter) == source;
-    }
-
-    if(find){
-        list<list<Packet*>* >::iterator iter = queues.begin();
-        while(num-- > 0){
-            iter++;
+        bool find = false;
+        int num = -1;
+        for(list<int>::iterator iter = address.begin(); !find && iter != address.end(); ++iter){
+            num++;
+            find = (*iter) == source;
         }
 
-        (*iter)->push_back(packet);
-        queuesCount++;
-    }else{
-        address.push_back(source);
-        queues.push_back(new list<Packet*>());
-        queues.back()->push_back(packet);
-        queuesCount++;
-    }
+        if(find){
+            list<list<Packet*>* >::iterator iter = queues.begin();
+            while(num-- > 0){
+                iter++;
+            }
 
-    return true;
+            (*iter)->push_back(packet);
+            queuesCount++;
+        }else{
+            address.push_back(source);
+            queues.push_back(new list<Packet*>());
+            queues.back()->push_back(packet);
+            queuesCount++;
+        }
+
+        return true;
+}
+
+bool RRScheduler::hasWaitingPacket(){
+    return false;
 }
 
 Packet* RRScheduler::getPacketToSend(){

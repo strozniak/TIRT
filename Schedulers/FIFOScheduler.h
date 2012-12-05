@@ -18,6 +18,7 @@
 
 using namespace std;
 #include "Scheduler.h"
+#include "list"
 
 class FIFOScheduler: public Scheduler {
     protected:
@@ -25,7 +26,6 @@ class FIFOScheduler: public Scheduler {
         list<Packet*> queue;
 
         virtual void initialize();
-        virtual void handleMessage(cMessage* msg);
         virtual bool receivePacket(Packet* packet);
         virtual bool  hasWaitingPacket();
         virtual Packet* getPacketToSend();

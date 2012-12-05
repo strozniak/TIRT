@@ -26,9 +26,9 @@ protected:
 
         virtual void initialize();
         virtual void handleMessage(cMessage* msg);
-        virtual bool receivePacket(Packet* packet);
-        virtual bool  hasWaitingPacket();
-        virtual Packet* getPacketToSend();
+        virtual bool receivePacket(Packet* packet) = 0;
+        virtual bool  hasWaitingPacket() = 0;
+        virtual Packet* getPacketToSend() = 0;
 };
 
 #endif /* SCHEDULER_H_ */

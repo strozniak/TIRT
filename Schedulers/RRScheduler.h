@@ -18,6 +18,7 @@
 
 using namespace std;
 #include "Scheduler.h"
+#include "list"
 
 class RRScheduler: public Scheduler {
     protected:
@@ -30,7 +31,6 @@ class RRScheduler: public Scheduler {
 
         int currentQueue;
         virtual void initialize();
-        virtual void handleMessage(cMessage* msg);
         virtual bool receivePacket(Packet* packet);
         virtual bool  hasWaitingPacket();
         virtual Packet* getPacketToSend();

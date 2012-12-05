@@ -15,8 +15,6 @@
 
 #include "Scheduler.h"
 
-Define_Module(Scheduler)
-
 void Scheduler::initialize(){
     event = new cMessage("event");
 }

@@ -18,18 +18,14 @@
 
 using namespace std;
 #include "FIFOScheduler.h"
+#include "list"
 
 class LIFOScheduler: public FIFOScheduler {
    protected:
        int32_t queueSize;
        list<Packet*> queue;
 
-       virtual void initialize();
-       virtual void handleMessage(cMessage* msg);
-       virtual bool receivePacket(Packet* packet);
-       virtual bool  hasWaitingPacket();
        virtual Packet* getPacketToSend();
-       virtual bool canReceive();
 };
 
 #endif /* LIFOSCHEDULER_H_ */
