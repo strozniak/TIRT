@@ -13,26 +13,29 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef RRSCHEDULER_H_
-#define RRSCHEDULER_H_
+#ifndef WRRSCHEDULER_H_
+#define WRRSCHEDULER_H_
 
 using namespace std;
 #include "Scheduler.h"
-#include "list"
 
-class RRScheduler: public Scheduler {
-    protected:
-        list<int> address;
-        list<list<Packet*>*> queues;
+class WRRScheduler: public Scheduler {
+protected:
+    int32_t queueSize;
+    int32_t queuesNums;
+    int32_t currentQueue;
 
-        int queuesCount;
-        int queueSize;
+    cPacketQueue** queues;
+    double* weights;
 
-        int currentQueue;
-        virtual void initialize();
-        virtual bool receivePacket(Packet* packet);
-        virtual bool  hasWaitingPacket();
-        virtual Packet* getPacketToSend();
+    virtual void initialize();
+    virtual void handleMessage(cMessage* msg);
+    virtual bool receivePacket(Packet* packet);
+    virtual bool  hasWaitingPacket();
+    virtual Packet* getPacketToSend();
+
+    bool canReceive(int32_t queueIndex);
+    void nextQueue();
 };
 
-#endif /* RRSCHEDULER_H_ */
+#endif /* WRRSCHEDULER_H_ */
