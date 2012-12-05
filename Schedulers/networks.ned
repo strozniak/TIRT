@@ -124,3 +124,35 @@ network SCHRR {
         SCH.out --> sink.in;
         
 }
+
+network SCHWRR {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,50");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,150");
+        };
+        
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };        
+        
+        SCH : WRRScheduler {
+        	@display("p=150,150");
+        };
+        
+        sink: Node {
+        	@display("p=250,150");
+        };
+        
+    connections:
+        
+        OnOff.out --> SCH.in++;
+        poissonGenerator.out --> SCH.in++;
+        MMPPGenerator.out --> SCH.in++;
+        SCH.out --> sink.in;
+        
+}
