@@ -29,7 +29,6 @@ protected:
     double* weights;
 
     virtual void initialize();
-    virtual void handleMessage(cMessage* msg);
     virtual bool receivePacket(Packet* packet);
     virtual bool  hasWaitingPacket();
     virtual Packet* getPacketToSend();
