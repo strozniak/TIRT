@@ -24,6 +24,7 @@ class MMPPGenerator : public cSimpleModule
         double lambda;
         int rnb;
         double delay;
+        simtime_t delayDef;
     protected:
         virtual cMessage *generatePacket();
         virtual void sendMessage();
@@ -36,6 +37,7 @@ Define_Module(MMPPGenerator);
 void MMPPGenerator::initialize(){
     lambda = par("lambda").doubleValue();
     rnb = par("rnb").longValue();
+    delayDef = 0.5;
 
     WATCH(delay);
 
@@ -52,6 +54,7 @@ void MMPPGenerator::sendMessage(){
     std::stringstream ss;
 
     simtime_t delay = poisson(lambda,rnb);
+    delay = std::max(delay,delayDef);
     lambda = delay.dbl();
     ss << "Self "<< delay;
 
@@ -65,7 +68,25 @@ void MMPPGenerator::sendMessage(){
 }
 
 cMessage *MMPPGenerator::generatePacket(){
-    Packet *packet = new Packet();
+    char msgname[30];
+    int src = 2;
+    int dest = 5;
+    int Class = 1;
+    int SessionId = 1;
+    int PacketId = 1;
+    int Payload = 1;
+    int ByteLength = rand()%200000;
+    sprintf(msgname, "packet-from-%d-to-%d", src, dest);
+
+    Packet *packet = new Packet(msgname);
+
+    packet->setSrc(src);
+    packet->setDst(dest);
+    packet->setSessionID(SessionId);
+    packet->setPacketID(PacketId);
+    packet->setPriority(Class);
+    packet->setPayload(Payload);
+    packet->setByteLength(ByteLength);
     return packet;
 }
 

@@ -14,16 +14,113 @@
 // 
 
 package tirtproject.Schedulers;
+import tirtproject.Generators.*;
 
 simple Scheduler
 {
     parameters:
-        @display("i=block/source");
+    	volatile double delay @unit(s) = default(exponential(1s));
+    
+    @display("i=device/accesspoint"); 
     gates:
-    	output out;        
+        input in[];
+        output out;        
 }
 
-network SchedulersNetwork
-{
-    
+network SCHFifo {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,50");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,150");
+        };
+        
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };        
+        
+        SCH : FIFOScheduler {
+        	@display("p=150,150");
+        };
+        
+        sink: Node {
+        	@display("p=250,150");
+        };
+        
+    connections:
+        
+        OnOff.out --> SCH.in++;
+        poissonGenerator.out --> SCH.in++;
+        MMPPGenerator.out --> SCH.in++;
+        SCH.out --> sink.in;
+        
+}
+
+
+network SCHLifo {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,50");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,150");
+        };
+        
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };        
+        
+        SCH : LIFOScheduler {
+        	@display("p=150,150");
+        };
+        
+        sink: Node {
+        	@display("p=250,150");
+        };
+        
+    connections:
+        
+        OnOff.out --> SCH.in++;
+        poissonGenerator.out --> SCH.in++;
+        MMPPGenerator.out --> SCH.in++;
+        SCH.out --> sink.in;
+        
+}
+
+
+network SCHRR {
+
+    submodules:
+        OnOff: OnOffGenerator {
+        	@display("p=50,50");
+        };
+        
+        poissonGenerator: PoissonGenerator {
+        	@display("p=50,150");
+        };
+        
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };        
+        
+        SCH : RRScheduler {
+        	@display("p=150,150");
+        };
+        
+        sink: Node {
+        	@display("p=250,150");
+        };
+        
+    connections:
+        
+        OnOff.out --> SCH.in++;
+        poissonGenerator.out --> SCH.in++;
+        MMPPGenerator.out --> SCH.in++;
+        SCH.out --> sink.in;
+        
 }

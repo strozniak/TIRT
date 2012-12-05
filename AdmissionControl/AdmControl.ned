@@ -15,9 +15,6 @@
 
 package tirtproject.AdmissionControl;
 import tirtproject.Generators.*;
-import tirtproject.AdmissionControl.BannedIp;
-import tirtproject.AdmissionControl.SizeControl;
-
 
 simple AdmControl {
 
@@ -41,18 +38,23 @@ network ACSize {
         	@display("p=50,150");
         };
         
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };
+        
         AC : SizeControl {
-        	@display("p=150,90");
+        	@display("p=150,150");
         };
         
         sink: Node {
-        	@display("p=250,90");
+        	@display("p=250,150");
         };
         
     connections:
         
         OnOff.out --> AC.in++;
         poissonGenerator.out --> AC.in++;
+        MMPPGenerator.out --> AC.in++;
         AC.out --> sink.in;
         
 }
@@ -67,21 +69,26 @@ network ACBannedIP {
         poissonGenerator: PoissonGenerator {
         	@display("p=50,150");
         };
+
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };
         
         AC : BannedIp {
-        	@display("p=150,90");
+        	@display("p=150,150");
         };
         
         sink: Node {
-        	@display("p=250,90");
+        	@display("p=250,150");
         };
         
     connections:
         
         OnOff.out --> AC.in++;
         poissonGenerator.out --> AC.in++;
+        MMPPGenerator.out --> AC.in++;
         AC.out --> sink.in;
- 	   
+        
 }
 
 network ACBuffor {
@@ -94,21 +101,26 @@ network ACBuffor {
         poissonGenerator: PoissonGenerator {
         	@display("p=50,150");
         };
+
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };
         
         AC : BufforControl {
-        	@display("p=150,90");
+        	@display("p=150,150");
         };
         
         sink: Node {
-        	@display("p=250,90");
+        	@display("p=250,150");
         };
         
     connections:
         
         OnOff.out --> AC.in++;
         poissonGenerator.out --> AC.in++;
+        MMPPGenerator.out --> AC.in++;
         AC.out --> sink.in;
- 	   
+        
 }
 
 network ACBlue {
@@ -122,18 +134,23 @@ network ACBlue {
         	@display("p=50,150");
         };
         
+        MMPPGenerator: MMPPGenerator {
+        	@display("p=50,250");
+        };        
+        
         AC : BLUEControl {
-        	@display("p=150,90");
+        	@display("p=150,150");
         };
         
         sink: Node {
-        	@display("p=250,90");
+        	@display("p=250,150");
         };
         
     connections:
         
         OnOff.out --> AC.in++;
         poissonGenerator.out --> AC.in++;
+        MMPPGenerator.out --> AC.in++;
         AC.out --> sink.in;
- 	   
+        
 }

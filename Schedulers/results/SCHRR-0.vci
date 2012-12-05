@@ -1,0 +1,20 @@
+file 1059 1354734143                                            
+version 2
+run SCHRR-0-20121205-17:59:46-4464
+attr configname SCHRR
+attr datetime 20121205-17:59:46
+attr experiment SCHRR
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network tirtproject.Schedulers.SCHRR
+attr processid 4464
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+vector 0  SCHRR.sink  arrivals  ETV
+attr interpolationmode none
+0	462 597 8 224 1 47.5 32 1 1 32 32
