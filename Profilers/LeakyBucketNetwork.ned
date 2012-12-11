@@ -3,7 +3,7 @@ package tirtproject.Profilers;
 import tirtproject.Generators.*;
 
 
-network LeakyBucketNet
+network LeakyBucketNetwork
 {
     submodules:
         gen: PoissonGenerator;
@@ -13,3 +13,15 @@ network LeakyBucketNet
         gen.out --> bucket.in;
         bucket.out --> sink.in;
 }
+
+simple LeakyBucket
+{
+    parameters:
+        volatile double serviceTime @unit(s);
+        volatile int buffer;
+        @display("i=block/bucket,#0080C0");
+    gates:
+        input in;
+        output out;
+}
+
