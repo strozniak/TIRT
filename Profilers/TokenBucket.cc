@@ -21,6 +21,8 @@ void TokenBucket::initialize() {
     tokenMax = par("tokenCount");
     tokenCount = tokenMax;
     tokenArrivalInterval = par("tokenArrivalInterval");
+
+    scheduleAt(simTime(), token);
 }
 
 int TokenBucket::getTokenArrivalInterval() {
