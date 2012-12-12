@@ -3,23 +3,20 @@
 Define_Module(LeakyBucket);
 
 LeakyBucket::LeakyBucket() {
-    msgServiced = endServiceMsg = NULL;
+    msgServiceTime = msgServiced = NULL;
 }
 
 LeakyBucket::~LeakyBucket() {
-    delete msgServiced;
-    cancelAndDelete(endServiceMsg);
+    delete msgServiceTime;
+    cancelAndDelete(msgServiceTime);
 }
 
 void LeakyBucket::initialize() {
-    endServiceMsg = new cMessage("end-service");
     queue.setName("queue");
+    msgServiceTime = new cMessage("time interval");
+    serviceTime = par("serviceTime");
 
-    qlenSignal = registerSignal("qlen");
-    busySignal = registerSignal("busy");
-    queueingTimeSignal = registerSignal("queueingTime");
-    emit(qlenSignal, queue.length());
-    emit(busySignal, 0);
+    scheduleAt(simTime(), msgServiceTime);
 }
 
 int LeakyBucket::getBuffer() {
@@ -27,45 +24,19 @@ int LeakyBucket::getBuffer() {
 }
 
 void LeakyBucket::handleMessage(cMessage *msg) {
-    if (msg == endServiceMsg) {
-        endService(msgServiced);
-        if (queue.empty()) {
-            msgServiced = NULL;
-            emit(busySignal, 0);
-        } else {
+    if (msg == msgServiceTime) {
+        if (queue.length() > 0) {
             msgServiced = (cMessage *) queue.pop();
-            emit(qlenSignal, queue.length());
-            emit(queueingTimeSignal, simTime() - msgServiced->getTimestamp());
-            simtime_t serviceTime = startService(msgServiced);
-            scheduleAt(simTime() + serviceTime, endServiceMsg);
+            EV << "Sending msg" << endl;
+            send(msgServiced, "out");
+        } else {
+            bubble("queue empty");
         }
-    } else if (!msgServiced) {
-        arrival(msg);
-        msgServiced = msg;
-        emit(queueingTimeSignal, 0.0);
-        simtime_t serviceTime = startService(msgServiced);
-        scheduleAt(simTime() + serviceTime, endServiceMsg);
-        emit(busySignal, 1);
+        scheduleAt(simTime() + serviceTime, msg);
+    } else if (queue.length() < getBuffer()) {
+        EV << "Message queued" << endl;
+        queue.insert(msg);
     } else {
-        arrival(msg);
-        if (queue.length() < getBuffer()) {
-            queue.insert(msg);
-            msg->setTimestamp();
-            emit(qlenSignal, queue.length());
-            EV << "queue size: " << queue.length();
-        } else { // wyrzuc pakiet
-            bubble("packet leaked!");
-        }
-
+        bubble("queue full - message leaked");
     }
-}
-
-simtime_t LeakyBucket::startService(cMessage *msg) {
-    EV << "Starting service of " << msg->getName() << endl;
-    return par("serviceTime");
-}
-
-void LeakyBucket::endService(cMessage *msg) {
-    EV << "Completed service of " << msg->getName() << endl;
-    send(msg, "out");
 }
