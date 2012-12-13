@@ -9,11 +9,11 @@ protected:
     simtime_t serviceTime;
 public:
     LeakyBucket();
-    virtual ~LeakyBucket();
+    ~LeakyBucket();
 
 protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    void initialize();
+    void handleMessage(cMessage *msg);
 
     int getBuffer();
 };

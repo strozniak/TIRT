@@ -15,11 +15,11 @@ protected:
 
 public:
     DoubleTokenBucket();
-    virtual ~DoubleTokenBucket();
+    ~DoubleTokenBucket();
 
 protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    void initialize();
+    void handleMessage(cMessage *msg);
 
     int getBuffer();
 };

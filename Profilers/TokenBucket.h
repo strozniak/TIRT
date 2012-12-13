@@ -14,14 +14,13 @@ protected:
 
 public:
     TokenBucket();
-    virtual ~TokenBucket();
+    ~TokenBucket();
 
 protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
+    void initialize();
+    void handleMessage(cMessage *msg);
 
-    // hook functions to (re)define behaviour
-    virtual void arrival(cMessage *msg) {}
+    void arrival(cMessage *msg) {}
     simtime_t startService(cMessage *msg);
     int getTokenArrivalInterval();
 };
